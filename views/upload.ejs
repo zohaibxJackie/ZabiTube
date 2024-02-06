@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--for icon of website  -->
+        <link rel="icon" href="/assets/Favicon.svg" type="image/x-icon">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/Favicon.svg">    
+    
+        <title>ZabiTube</title>
+        <link rel="stylesheet" href="/Stylesheets/style.css">
+        <link rel="stylesheet" href="/Stylesheets/upload.css">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
+    </head>
+<body>
+    <div class="upload-main">
+        <%- include('./partials/inside-h.ejs') %>
+
+
+        <div class="upload-hero">
+            <div class="h-left">
+                <div class="u-box">
+                    <form action="/upload" method="post" enctype="multipart/form-data" class="flex f-d-column gap-1 p-1">
+                        <input type="file" name="video" accept="video/*" required>
+                        <input type="file" name="thumbnail" accept="image/*" required>
+                        <input type="text" name="title" id="filetitle" placeholder="Enter the title" required>
+                        <textarea name="description" id="filedescription" cols="30" rows="10" placeholder="Enter the description" required></textarea>
+                        
+                        <button type="submit" id="filebtn">Upload</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('./partials/footer.ejs') %>

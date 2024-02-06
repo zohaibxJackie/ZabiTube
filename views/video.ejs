@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--for icon of website  -->
+    <link rel="icon" href="/assets/Favicon.svg" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/Favicon.svg">
+
+    <title>ZabiTube</title>
+    <link rel="stylesheet" href="/Stylesheets/style.css">
+    <link rel="stylesheet" href="/Stylesheets/video.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="video-main flex f-d-column gap-1">
+        <%- include('./partials/inside-h.ejs') %>
+
+            <div class="v-hero flex gap-1 justify-content">
+                <div class="hero-left flex f-d-column gap-1">
+                    <div class="video">
+                        <video src="/images/uploads/<%=video.video%>" poster="/images/uploads/<%=video.thumbnail%>" preload="auto" controls muted></video>
+                    </div>
+                    <strong><p><%= video.title %></p></strong>
+                    <div class="video-data flex gap-1">
+                        <a href="/likes/post/<%= video._id%>">
+                            <% if (video.likes.indexOf(user._id) !== -1 ) {%>
+                                <i class="ri-heart-fill"></i>
+                            <%} else {%>
+                                <i class="ri-heart-line" id="like-icon"></i>
+                            <%}%>
+                        </a>
+                        <p><%=video.likes.length%></p>
+                        <p><%= moment(video.date).fromNow() %></p>
+                    </div>
+                    <!-- creator details will go here like his profile picture, channel name, followers -->
+                    <div class="creator-details flex gap-1 align-items">
+                        <img src="/images/uploads/<%=video.uploader.profileImage%>" class="creator-image" alt="img">
+                        <p><%=video.uploader.username%></p>
+                        <p><%= video.uploader.followers.length %> followers</p>
+                        <form action="/follow/<%= video._id %>" method="post">
+
+                            <% if(video.uploader.followers.includes(user._id) === true) {%>
+                                <button type="submit" class="Subscribed">Subscribed</button>
+                            <%} else {%>
+                                <button type="submit" class="Subscribe">Subscribe</button>
+                            <%} %>
+                        </form>
+                    </div>
+                    <!-- comment section -->
+                    <div class="comments flex f-d-column gap-1">
+                
+                        <!-- comment section of user -->
+                        <form action="/comment/<%=video._id%>" class="flex flex-wrap gap-1" method="post">
+                            <input type="text" name="comment" id="commentbox" placeholder="comment here....." required>
+                            <button type="submit">Comment</button>
+                        </form>
+                        <%for (let i = 0; i < video.comments.length; i++) {%>
+                            <div class="user">
+                                <div class="user-info flex gap-1 align-items">
+                                    <img src="/images/uploads/<%= video.commentuser[i].profileImage %>" class="user-image" alt="user-image">
+                                    <p>@<%= video.commentuser[i].username %></p>
+                                </div>
+                                <div class="user-comment">
+                                    <p><%= video.comments[i] %></p>
+                                </div>
+                            </div>
+                        <%}%>
+                    </div>
+                </div>
+
+                <div class="hero-right flex f-d-column p-1 gap-1">
+                    <p><strong>Other videos you may like</strong></p>
+                    <% allvideos.forEach(function(elem) { %>
+                        <div class="feed-video">
+                            <div class="feed-video-inner flex gap-1">
+                                <div class="f-d-left">
+                                    <a href="/watchvideo/<%= elem._id %>"
+                                        style="height: 100%; width: 100%; display: block;"><div style="width: 100%; height: 100%; background: url('/images/uploads/<%= elem.thumbnail %>'); background-position: center;background-repeat: no-repeat;background-size: contain;"></div></a>
+                                </div>
+                                <div class="f-d-right">
+                                    <p><%= elem.title %></p>
+                                    <p><%= elem.likes.length %> Likes</p>
+                                    <div class="creator-info flex gap-1">
+                                        <img src="/images/uploads/<%= elem.uploader.profileImage %>" alt="image">
+                                        <p><%= elem.uploader.username %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>                    
+                </div>
+            </div>
+    </div>
+<%- include('./partials/footer.ejs') %>

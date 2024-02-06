@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/favicon.png">
+    <title>ZabiTube</title>
+    <link rel="stylesheet" href="/Stylesheets/style.css">
+    <link rel="stylesheet" href="/Stylesheets/profile.css">
+</head>
+
+<body>
+    <div class="main-profile flex f-d-column gap-2">
+        <%- include('./partials/inside-h.ejs') %>
+
+            <div class="container flex f-d-column">
+
+                <div class="profile-header flex gap-2 align-items">
+                    <!-- I have to add the profile image here -->
+                    <div class="profile-image">
+                        <div style="width: 100%; height: 100%; background: url('/images/uploads/<%= user.profileImage %>'); background-position: center;background-repeat: no-repeat;background-size: cover; background-color: lightgray;"></div>
+                    </div>
+                    <div class="profile-text flex f-d-column justify-content">
+                        <h2>
+                            <%= user.fullname %>
+                        </h2>
+                        <p>@<%= user.username %></p>
+                        <p>Total like are: <%= totalLikes %></p>
+                        <p>Click on the profile image to upadte</p>
+                        <form action="/uploadProfile" method="post" enctype="multipart/form-data">
+                            <input type="file" name="profileImage" value="image" id="uploadProfile" required hidden>
+                            <button type="submit" id="uploadbtn">Update</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="profile-content">
+                    <div class="card-items flex justify-content">
+                            <% user.post.forEach(function(vid) { %>
+                                <%= console.log("The object is",vid) %>
+                                <div class="card">
+                                  <div class="card-header">
+                                    <div class="thumbnail">
+                                        <div style="width: 100%; height: 100%; background: url('/images/uploads/<%= vid.thumbnail %>'); background-position: center;background-repeat: no-repeat;background-size: contain;"></div>
+                                    </div>
+                                  </div>
+                                  <div class="card-footer">
+                                    <h2><%= vid.title %></h2>
+                                    <p>likes</p>
+                                    <p>1.3k</p>
+                                  </div>
+                                </div>
+                            <% }) %>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <script>
+        const update = document.querySelector('.profile-image div')
+        update.addEventListener('click', () => {
+            document.getElementById('uploadProfile').click()
+        }) 
+        
+    </script>
+    <%- include('./partials/footer.ejs') %>

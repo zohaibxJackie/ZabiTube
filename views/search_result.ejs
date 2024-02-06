@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--for icon of website  -->
+    <link rel="icon" href="/public/assets/Favicon.svg" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/assets/Favicon.svg">    
+
+    <title>ZabiTube</title>
+    <link rel="stylesheet" href="/Stylesheets/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="main" class="flex f-d-column">
+        <%- include('./partials/inside-h.ejs') %>
+        <div class="hero">
+            <div class="feed flex justify-content">
+                <% posts.forEach(function(post) { %>
+                    <div class="feed-vid">
+                        <div class="video-thumbnail">
+                            <a href="/watchvideo/<%= post._id %>" style="height: 100%; width: 100%; display: block;">
+                                <div style="width: 100%; height: 100%; background: url('/images/uploads/<%=post.thumbnail %>'); background-position: center;background-repeat: no-repeat;background-size: contain;"></div>
+                            </a>
+                        </div>        
+                        <div class="video-footer flex f-d-column gap-1">
+                            <h2><%= post.title %></h2>
+                            <div class="chanel-info flex gap-1 align-items">
+                                <div class="img" style="background: url('/images/uploads/<%=post.uploader.profileImage %>'); background-position: center;background-repeat: no-repeat;background-size: contain;"></div>
+                                <p><%= post.uploader.username %></p>
+                                <p><%= post.uploader.followers.length %> followers</p>
+                            </div>
+                            <div class="flex gap-1 align-items">
+                                <p><%= post.likes.length %> likes</p>
+                                <p><%= moment(post.date).fromNow() %></p>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js" integrity="sha512-hUhvpC5f8cgc04OZb55j0KNGh4eh7dLxd/dPSJ5VyzqDWxsayYbojWyl5Tkcgrmb/RVKCRJI1jNlRbVP4WWC4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<%- include('./partials/footer.ejs') %>

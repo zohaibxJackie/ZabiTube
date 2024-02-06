@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+/* Stop animation during the resizing */
+.resize-animation-stopper * {
+    transition: none !important;
+    animation: none !important;
+}
+
+/* ------------------- */
+/* Reset               */
+/* ------------------- */
+
+/* https://piccalil.li/blog/a-modern-css-reset/ */
+
+/* Box sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Reset margins */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+picture {
+    margin: 0;
+}
+
+/* set up the body */
+body {
+    line-height: 1.5;
+    min-height: 100vh;
+    background-color: #f7f7f7;
+}
+
+/* make images easier to work with */
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+/* make form elements easier to work with */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* remove animations for people who've turned them off */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+::selection {
+    background-color: #55d11c;
+    color: white;
+}
+/* universal classes */
+.flex {
+    display: flex;
+}
+
+.f-d-column {
+    flex-direction: column;
+}
+
+.align-items {
+    align-items: center;
+}
+
+.justify-content {
+    justify-content: center;
+}
+
+.justify-content-s {
+    justify-content: space-between;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.gap-1 {
+    gap: 1rem;
+}
+
+.gap-2 {
+    gap: 2rem;
+}
+
+.gap-3 {
+    gap: 3rem;
+}
+.p-1 {
+    padding: 1rem;
+}
+
+.p-1 {
+    padding: 2rem;
+}
+
+a {
+    color: #4cbb17;
+
+    &:hover {
+        color: #3e9d12;
+    }
+}
+
+#main {
+    gap: 3rem;
+}
+
+header {
+    width: 100%;
+    background-color: #fff;
+    padding: 10px 0;
+}
+
+.primary-nav {
+    display: flex;
+    gap: 1rem;
+    padding-right: 2rem;
+}
+
+.primary-nav li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+
+    /* for underline animations */
+    &:hover::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 100%;
+        background-color: #4cbb17;
+        animation: left 0.3s ease;
+    }
+}
+
+@keyframes left {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+.primary-nav li a {
+    text-decoration: none;
+    color: #000;
+}
+
+.primary-nav li>[aria-hidden="true"] {
+    color: white;
+    font-weight: 700;
+    margin-inline-end: 0.75em;
+}
+
+.nav-btn {
+    display: none;
+}
+
+.logo {
+    margin: 1rem 2rem;
+    width: 10rem;
+}
+
+/* this class is only for hamburger manu */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    /* added line */
+    border: 0;
+}
+
+@media (max-width: 769px) {
+    header {
+        flex-direction: column;
+    }
+    .primary-nav {
+        flex-direction: column;
+        position: fixed;
+        z-index: 999;
+        inset: 0 0 0 30%;
+        padding: min(30vh, 10rem) 2em;
+        transform: translateX(100%);
+        transition: transform 350ms ease-out;
+    }
+
+    .primary-nav[data-visible="true"] {
+        transform: translateX(0%);
+        background-color: #4cbb17;
+    }
+
+    .primary-nav li {
+        text-align: center;
+    }
+    .primary-nav li a {
+        font-size: 2rem;
+        font-weight: 600;
+    }
+    .nav-btn {
+        display: block;
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        aspect-ratio: 1;
+        width: 2rem;
+        background-image: url('/assets/icon-hamburger.svg');
+        background-color: transparent;
+        cursor: pointer;
+        z-index: 1000;
+        border: 0;
+        background-repeat: no-repeat;
+        filter: brightness(1) invert(1);
+    }
+
+    .nav-btn[aria-expanded='true'] {
+        background-image: url('/assets/icon-close.svg');
+        position: fixed;
+    }
+    .v-hero {
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .profile-header {
+        flex-direction: column;
+    }
+}
+
+.search button {
+    padding: 0.1rem;
+    transition: 0.1s ease-in;
+}
+.search button:hover {
+    background-color: #55d11c;
+    /* border: 0;
+    padding: 0.2rem; */     
+}
+
+#search-box {
+    height: 1.8rem;
+    /* clamp(min, prefered, max) */
+    width: clamp(9rem, 15rem, 25vw);
+    outline: 0;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #00000039;
+    font-family: sans-serif;
+    font-weight: 100;
+    opacity: 0.7;
+}
+/* This is the code for videos aka feed */
+.feed {
+    width: 90%;
+    margin: 0 auto;
+    gap: 3rem;
+    background-color: #fff;
+    padding: 2rem;
+    flex-wrap: wrap;
+}
+
+.feed-vid {
+    width: 20rem;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.video-thumbnail {
+    height: 14rem;
+    width: 20rem;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+
+.video-thumbnail img {
+    height: 100%;
+    width: 100%;
+}
+
+.chanel-info img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100%;
+}
+
+.chanel-info .img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100%;
+}
+
+.video-footer {
+    padding: 1rem 0.5rem;
+}
+
+.video-footer p {
+    font-size: 0.9rem;
+}

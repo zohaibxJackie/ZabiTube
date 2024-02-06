@@ -1,0 +1,124 @@
+.video-main {
+    background-color: #f7f7f7;
+}
+
+.v-hero {
+    width: 90%;
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: #fff;
+}
+
+.video {
+    height: clamp(16rem, 40vw, 36rem);
+    width: clamp(20rem, 55vw, 50rem);
+    position: relative;
+}
+
+.video video {
+    position: absolute;
+    height: inherit;
+    width: inherit;
+    top: 0;
+    left: 0;
+}
+video::-webkit-media-controls-progress-bar {
+    background-color: red;
+  }
+
+.video-data button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.creator-image {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 100%;
+}
+
+.comments {
+    width: 90%;
+    margin: 0 auto;
+    background-color: #e8e5e5;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+#commentbox {
+    border: 1px solid;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+.user-image {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 100%;
+}
+
+.user-comment {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 0.7rem;
+    padding: 0.5rem;
+}
+
+.hero-right {
+    background-color: #e8e5e5;
+    border-radius: 0.7rem;
+    max-height: 50rem;
+    overflow-y: scroll;
+}
+
+.hero-right::-webkit-scrollbar {
+    width: 0.4rem;
+}
+
+.hero-right::-webkit-scrollbar-thumb {
+    background-color: #a19b9b;
+    border-radius: 0.5rem;
+}
+.hero-right::-webkit-scrollbar-thumb:hover {
+    background-color: #858181;
+}
+.hero-right::-webkit-scrollbar-thumb:focus {
+    background-color: #ad9f9f;
+}
+
+.hero-right::-webkit-scrollbar-track {
+    background-color: #ddd;
+}
+
+.f-d-left {
+    width: 12rem;
+    height: 7rem;
+}
+
+.creator-info img {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 100%;
+}
+
+.Subscribed {
+    background-color: #4cbb17;
+    color: white;
+    font-weight: 700;
+    border-radius: 2rem;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid;
+    cursor: pointer;
+}
+
+.Subscribe {
+    background-color: #ff1e1e;
+    color: white;
+    font-weight: 700;
+    border-radius: 2rem;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid;
+    cursor: pointer;
+}

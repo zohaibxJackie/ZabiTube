@@ -1,0 +1,22 @@
+<header class="flex justify-content-s align-items">
+    <div class="logo">
+        <a href="/index"><img src="/assets/ZabiTube.png" alt="Logo"></a>
+    </div>
+
+    <div class="search">
+        <form action="/search" method="post" class="flex align-items justify-content gap-1">
+            <input type="text" name="search" id="search-box" placeholder="Search here..." required>
+            <button type="submit"><img src="/assets/search-line.png" alt="search" style="height: 1rem; cursor: pointer;"></button>
+        </form>
+    </div>
+    <button class="nav-btn" aria-controls="primary-navigation" aria-expanded="false"><span aria-hidden="true"
+            class="sr-only">Menu</span></button>
+    <nav>
+        <ul id="primary-navigation" data-visible="false" class="primary-nav">
+            <li><a href="/index">Home</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/upload">Upload</a></li>
+            <li><a href="/logout">Log out</a></li>
+        </ul>
+    </nav>
+</header>

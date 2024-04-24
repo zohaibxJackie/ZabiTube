@@ -34,7 +34,7 @@ Talking about the code, it is pretty simple and self-explanatory. The following 
 | multer | For uploading content
 | moment | For calculating the time for uploaded video
 
-Thees are some of the highlighting libraries along with their purposes.
+These are some of the highlighting libraries along with their purposes.
 
 __Express generator was used to create all the initial files that are required for any express app to work__
 

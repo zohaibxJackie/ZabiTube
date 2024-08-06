@@ -12,7 +12,11 @@ const upload = require('./multer');
 
 /* GET home page. */
 router.get('/register', function (req, res, next) {
-  res.render('Register');
+  try {
+    res.render('Register');
+  } catch (error) {
+    res.send("something went wrong")
+  }
 });
 
 // this will be the feed or home page
@@ -48,10 +52,14 @@ router.get('/profile', isLoggedIn, async function (req, res, next) {
 
 // This is to see posts of all users
 router.get('/feed', isLoggedIn, async function (req, res, next) {
-  const user = await userModel.findOne({ username: req.session.passport.user });
-  let posts = await videoModel.find()
-    .populate("user")
-  res.render("feed", { user, posts });
+  try {
+    const user = await userModel.findOne({ username: req.session.passport.user });
+    let posts = await videoModel.find()
+      .populate("user")
+    res.render("feed", { user, posts });
+  } catch (error) {
+    res.send("something went wrong");
+  }
 });
 
 router.get("/likes/post/:id", isLoggedIn, async function (req, res) {
@@ -92,7 +100,7 @@ router.post('/comment/:id', isLoggedIn, async function (req, res) {
     await post.save()
     res.redirect('back')
   } catch (error) {
-    res.send("error in commenting")
+    res.send("something went wrong");
   }
 })
 
@@ -108,7 +116,7 @@ router.post('/search', async function (req, res) {
       res.send("Oops! no such content available");
     }
   } catch (error) {
-    res.send("error getting search result");
+    res.send("something went wrong");
   }
 });
 
@@ -163,22 +171,25 @@ router.post('/uploadProfile', upload.single('profileImage'), async function (req
     await user.save();
     res.redirect('/profile');
   } catch (error) {
-    console.error(error);
     res.status(500).send("Error uploading profile image");
   }
 });
 
 
 router.post('/register', async function (req, res, next) {
-  const { username, email, fullname } = req.body;
-  const userdata = new userModel({ username, email, fullname });
+  try {
+    const { username, email, fullname } = req.body;
+    const userdata = new userModel({ username, email, fullname });
 
-  userModel.register(userdata, req.body.password)
-    .then(function () {
-      passport.authenticate('local')(req, res, function () {
-        res.redirect('/profile');
-      });
-    })
+    userModel.register(userdata, req.body.password)
+      .then(function () {
+        passport.authenticate('local')(req, res, function () {
+          res.redirect('/profile');
+        });
+      })
+  } catch (error) {
+    res.send("something went wrong");
+  }
 })
 
 router.post("/login", passport.authenticate("local", {
@@ -190,10 +201,14 @@ router.post("/login", passport.authenticate("local", {
 
 
 router.get('/logout', function (req, res) {
-  req.logout(function (err) {
-    if (err) { return next(err); }
-    res.redirect('/');
-  });
+  try {
+    req.logout(function (err) {
+      if (err) { return next(err); }
+      res.redirect('/');
+    });
+  } catch (error) {
+    res.send("something went wrong");
+  }
 });
 
 function isLoggedIn(req, res, next) {
